@@ -9,24 +9,25 @@ using namespace std;
 
 struct DSU 
 {
-	vector<int> e;
+    vector<int> e;
 
-	void init (int n) { e = vector<int>(n, -1); }
-	
+    void init (int n) { e = vector<int>(n, -1); }
+
     int get (int x) { return e[x] < 0 ? x : e[x] = get(e[x]); };
-	
+
     bool sameSet (int x, int y) { return get(x) == get(y); };
 	
     int size (int x) { return -e[get(x)]; }
 	
-    bool unite (int x, int y) {
-		x = get(x), y = get(y);
-		if (x == y) return false;
-		if (e[x] > e[y]) swap(x, y);
-		e[x] += e[y];
-		e[y] = x;
+    bool unite (int x, int y) 
+    {
+	    x = get(x), y = get(y);
+	    if (x == y) return false;
+	    if (e[x] > e[y]) swap(x, y);
+	    e[x] += e[y];
+	    e[y] = x;
 		return true;
-	}
+    }
 };
 
 int main ()
@@ -61,22 +62,23 @@ int main ()
     sort(edges.begin(), edges.end(), greater<pair<int, pair<int, int>>>());
     sort(queries.begin(), queries.end(), greater<pair<int, pair<int, int>>>());
 
-	DSU dsu;
-	dsu.init(n);
-	vector<int> results(q);
-	int idx = 0;
-	for (auto query: queries) 
+    DSU dsu;
+    dsu.init(n);
+    vector<int> results(q);
+    int idx = 0;
+    for (auto query: queries) 
     {
-		int v = query.second.second;
-		int curK = query.first;
+        int v = query.second.second;
+        int curK = query.first;
 
-		while (idx < (int) edges.size() && edges[idx].first >= curK) 
+        while (idx < (int) edges.size() && edges[idx].first >= curK) 
         {
-			dsu.unite(edges[idx].second.first, edges[idx].second.second);
-			idx++;
-		}
-		results[query.second.first] = dsu.size(v) - 1;
-	}
+            dsu.unite(edges[idx].second.first, edges[idx].second.second);
+            idx++;
+        }
+
+        results[query.second.first] = dsu.size(v) - 1;
+    }
 
     for (int i = 0; i < q; i++)
     {
