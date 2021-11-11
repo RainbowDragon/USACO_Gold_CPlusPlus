@@ -28,7 +28,8 @@ struct DSU
             return x;
         }
         else {
-            return getRoot(roots[x]);
+            roots[x] = getRoot(roots[x]);
+            return roots[x];
         }
     }
 
@@ -36,12 +37,13 @@ struct DSU
     {
         x = getRoot(x);
         y = getRoot(y);
+
+        if (x > y) {
+            swap(x, y);
+        }
+
         if (x < y) {
             roots[y] = x;
-            count--;
-        }
-        else if (x > y) {
-            roots[x] = y;
             count--;
         }
     }
