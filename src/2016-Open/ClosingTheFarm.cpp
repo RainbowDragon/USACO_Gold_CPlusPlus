@@ -12,7 +12,7 @@ struct DSU
     vector<int> roots;
     int count;
 
-    void init (int n) 
+    void init(int n) 
     {
         count = n; 
         roots = vector<int>(n);
@@ -22,7 +22,7 @@ struct DSU
         }
     }
 
-    int getRoot (int x) 
+    int getRoot(int x) 
     { 
         if (roots[x] == x) {
             return x;
@@ -32,7 +32,7 @@ struct DSU
         }
     }
 
-    void unite (int x, int y) 
+    void unite(int x, int y) 
     {
         x = getRoot(x);
         y = getRoot(y);
