@@ -9,28 +9,50 @@ using namespace std;
 
 struct DSU 
 {
-    vector<int> e;
+    vector<int> roots;
 
-    void init (int n) { e = vector<int>(n, -1); }
+    void init(int n) 
+    { 
+        roots = vector<int>(n, -1); 
+    }
 
-    int get (int x) { return e[x] < 0 ? x : e[x] = get(e[x]); };
-
-    bool sameSet (int x, int y) { return get(x) == get(y); };
-	
-    int size (int x) { return -e[get(x)]; }
-	
-    bool unite (int x, int y) 
+    int getRoot(int x) 
     {
-        x = get(x), y = get(y);
-        if (x == y) return false;
-        if (e[x] > e[y]) swap(x, y);
-        e[x] += e[y];
-        e[y] = x;
+        if (roots[x] < 0) {
+            return x;
+        }
+        else {
+            roots[x] = getRoot(roots[x]); 
+            return roots[x];
+        }
+    }
+	
+    int getSize(int x) 
+    { 
+        return -roots[getRoot(x)]; 
+    }
+	
+    bool unite(int x, int y) 
+    {
+        x = getRoot(x); 
+        y = getRoot(y);
+        
+        if (x == y) {
+            return false;
+        }
+        
+        if (roots[x] > roots[y]) {
+            swap(x, y);
+        }
+
+        roots[x] += roots[y];
+        roots[y] = x;
+        
         return true;
     }
 };
 
-int main ()
+int main()
 {
     string FileName = "mootube";
 
@@ -77,7 +99,7 @@ int main ()
             idx++;
         }
 
-        results[query.second.first] = dsu.size(v) - 1;
+        results[query.second.first] = dsu.getSize(v) - 1;
     }
 
     for (int i = 0; i < q; i++)
