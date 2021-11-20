@@ -16,7 +16,7 @@ struct DSU
         roots = vector<pair<int,int>>(n);
         for (int i = 0; i < n; i++)
         {
-            roots[i] = {i, 1};
+            roots[i] = make_pair(i, 1);
         }
     }
 
