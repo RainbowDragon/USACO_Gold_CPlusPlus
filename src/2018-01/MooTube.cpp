@@ -9,27 +9,31 @@ using namespace std;
 
 struct DSU 
 {
-    vector<int> roots;
+    vector<pair<int,int>> roots;
 
     void init(int n) 
     { 
-        roots = vector<int>(n, -1); 
+        roots = vector<pair<int,int>>(n);
+        for (int i = 0; i < n; i++)
+        {
+            roots[i] = {i, 1};
+        }
     }
 
     int getRoot(int x) 
     {
-        if (roots[x] < 0) {
+        if (roots[x].first == x) {
             return x;
         }
         else {
-            roots[x] = getRoot(roots[x]); 
-            return roots[x];
+            roots[x].first = getRoot(roots[x].first); 
+            return roots[x].first;
         }
     }
 	
     int getSize(int x) 
     { 
-        return -roots[getRoot(x)]; 
+        return roots[getRoot(x)].second; 
     }
 	
     bool unite(int x, int y) 
@@ -45,8 +49,8 @@ struct DSU
             swap(x, y);
         }
 
-        roots[x] += roots[y];
-        roots[y] = x;
+        roots[x].second += roots[y].second;
+        roots[y].first = x;
         
         return true;
     }
