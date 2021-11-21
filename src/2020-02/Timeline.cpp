@@ -23,7 +23,7 @@ int main()
         fin >> results[i];
     }
 
-    vector<pair<int,int>> edges[n+1];
+    vector<pair<int, int>> edges[n+1];
     vector<int> pre(n+1, 0);
     for (int i = 0; i < c; i++)
     {
@@ -45,7 +45,7 @@ int main()
     {
         int index = q.front();
         q.pop();
-        for (pair<int,int> p : edges[index])
+        for (pair<int, int> p : edges[index])
         {
             results[p.first] = max(results[p.first], results[index]+p.second);
             pre[p.first]--;
