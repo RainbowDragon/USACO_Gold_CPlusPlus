@@ -9,11 +9,11 @@ using namespace std;
 
 struct DSU 
 {
-    vector<pair<int,int>> roots;
+    vector<pair<int, int>> roots;
 
     void init(int n) 
     { 
-        roots = vector<pair<int,int>>(n);
+        roots = vector<pair<int, sint>>(n);
         for (int i = 0; i < n; i++)
         {
             roots[i] = make_pair(i, 1);
