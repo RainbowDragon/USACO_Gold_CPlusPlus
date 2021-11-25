@@ -18,14 +18,13 @@ int main()
     fin >> t >> a >> b;
 
     bool dp[t+1][2];
+    memset(dp, false, sizeof dp);
     dp[0][0] = true;
     dp[0][1] = true;
 
     int result = 0;
     for (int i = 1; i <= t; i++)
     {
-        dp[i][0] = false;
-        dp[i][1] = false;
         if ((i >= a && dp[i-a][0]) || (i >= b && dp[i-b][0])) {
             dp[i][0] = true;
             dp[i/2][1] = true;
