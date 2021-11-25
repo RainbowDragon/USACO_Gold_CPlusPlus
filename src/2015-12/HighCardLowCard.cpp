@@ -21,12 +21,8 @@ int main()
 
     bool hasCard[N];
     bool firstHalf[N];
-
-    for (int i = 0; i < N; i++)
-    {
-        hasCard[i] = false;
-        firstHalf[i] = false;
-    }
+    memset(hasCard, false, sizeof hasCard);
+    memset(firstHalf, false, sizeof firstHalf);
 
     for (int i = 0; i < n; i++) 
     {
