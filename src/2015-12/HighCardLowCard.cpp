@@ -65,8 +65,8 @@ int main()
 
     bi = n - 1;
     int ei = k - 1;
-    while (ei >= 0) {
-
+    while (ei >= 0) 
+    {
         if (bessie[bi] > elsie[ei]) {
             bi--;
             result++;
@@ -76,8 +76,8 @@ int main()
 
     bi = 0;
     ei = k;
-    while (ei < n) {
-
+    while (ei < n) 
+    {
         if (bessie[bi] < elsie[ei]) {
             bi++;
             result++;
