@@ -6,7 +6,6 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-typedef long long ll;
 
 void dfs(int farm, int time, int* result, vector<int>* graph) 
 {
